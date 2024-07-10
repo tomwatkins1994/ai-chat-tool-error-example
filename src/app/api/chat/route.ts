@@ -48,8 +48,8 @@ export async function POST(req: NextRequest): Promise<Response> {
                         })
                         .array(),
                 }),
-                execute: async ({ results }) => {
-                    await sleep(5000);
+                execute({ results }) {
+                    return sleep(5000);
                 },
             },
         },
