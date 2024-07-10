@@ -20,6 +20,10 @@ export async function POST(req: NextRequest): Promise<Response> {
         );
     }
 
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     const result = await streamText({
         model: openai("gpt-4-turbo"),
         temperature: 0.3,
@@ -44,6 +48,9 @@ export async function POST(req: NextRequest): Promise<Response> {
                         })
                         .array(),
                 }),
+                execute: async ({ results }) => {
+                    await sleep(5000);
+                },
             },
         },
     });
